@@ -5,7 +5,7 @@ import Islands from "./Islands.vue";
 <template>
   <main>
     <h1>WELCOME TO SEARCH ISLAND</h1>
-    <RouterLink to="/islands"> PROVA </RouterLink>
+    <RouterLink to="/islands"> <img src="../public/island.svg" alt="image"></RouterLink>
   </main>
 </template>
 
@@ -14,15 +14,13 @@ main {
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
 }
 
-.home_island {
-  padding: 180px;
-  justify-self: center;
+img {
   grid-row: 2;
   grid-column: 1;
-  justify-self: center;
-  background: url(../public/island.svg) no-repeat;
   border: none;
 }
 

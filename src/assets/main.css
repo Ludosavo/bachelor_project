@@ -5,14 +5,10 @@ body {
   font-family: "Jersey 10", sans-serif;
   color: rgb(255, 255, 255);
   background-color: #1560BD;
-  max-width: 1280px;
-  margin: 0 auto;
-  font-weight: normal;
 }
 
 @media (min-width: 1024px) {
   #app {
     background-color: #1560BD;
-    padding: 0 2rem;
   }
 }

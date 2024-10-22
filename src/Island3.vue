@@ -1,0 +1,6 @@
+
+<template>
+    LALAL
+    <RouterView/>
+
+</template>
