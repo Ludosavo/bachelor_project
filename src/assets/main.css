@@ -3,12 +3,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&family=Jersey+10&display=swap'); 
 body {
   font-family: "Jersey 10", sans-serif;
-  color: rgb(255, 255, 255);
-  background-color: #1560BD;
+  color: rgb(245, 245, 245);
 }
 
-@media (min-width: 1024px) {
-  #app {
-    background-color: #1560BD;
-  }
-}
