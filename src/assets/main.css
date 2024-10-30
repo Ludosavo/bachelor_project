@@ -1,8 +1,11 @@
 /* @import './base.css'; */
 
-@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&family=Jersey+10&display=swap'); 
-body {
+@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&family=Jersey+10&display=swap');
+
+html, body {
+  
+  margin:0;
+  height: 100%;
   font-family: "Jersey 10", sans-serif;
   color: rgb(245, 245, 245);
 }
-

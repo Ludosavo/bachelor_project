@@ -10,7 +10,7 @@ import Home from "@/Home.vue";
 const routes = [
   { path: "/", component: Home },
   { path: "/islands", component: Islands },
-  { path: "/island1", component: Island1},
+  { path: "/island1/", component: Island1},
   { path: "/island2", component: Island2},
   { path: "/island3", component: Island3},
   { path: "/island4", component: Island4},

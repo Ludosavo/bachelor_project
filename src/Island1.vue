@@ -1,50 +1,63 @@
 <script>
-import ChatGPT from "./components/icons/ChatGPT.vue";
-import GoogleCSE from "./GoogleCSE.vue";
+import ChatGPT from "./components/ChatGPT.vue";
+// import ChatBox from "./components/ChatBox.vue";
+// import GoogleCSE from "./components/GoogleCSE.vue";
 export default {
   components: {
     ChatGPT,
+    // ChatBox,
+    // GoogleCSE,
   },
 };
 </script>
 
 <template>
-  <main id="island1">
+  <main class="island1">
     <div class="question_card">Domanda:</div>
+    <div class="answer_card">
+      <input type="text">
+      <button class="submit" @click="submit_answer()"> Invia</button>
+    </div>
     <div id="search_engine">
       <div class="engine">Google:</div>
       <br />
-      <div class="gcse-search"></div>
+      <GoogleCSE/>
     </div>
     <div id="llm">
       <div class="engine">ChatGPT:</div>
       <br />
-      <ChatGPT />
+      <ChatGPT/>
     </div>
   </main>
   <RouterView />
 </template>
 
 <style scoped>
-#island1 {
+.island1 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  height: 80vh;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
   align-items: center;
+  justify-items: center;
 }
 
 .question_card {
-  grid-column: 1 / span 2;
+  grid-column: 1;
   grid-row: 1;
   justify-self: center;
   border: 2px solid white;
   border-radius: 3px;
-  width: auto;
-  height: auto;
   font-size: 35px;
 }
 
+.answer_card{
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  border: 2px solid white;
+  border-radius: 3px;
+  font-size: 35px;
+}
 .engine {
   align-content: center;
   font-size: 50px;
@@ -55,8 +68,8 @@ export default {
 #search_engine {
   border: 2px solid white;
   border-radius: 10px;
-  height: 70vh;
-  width: 70vh;
+  width: 100%;
+  height: 100%;
   grid-column: 1;
   grid-row: 2;
   justify-self: center;
@@ -65,8 +78,8 @@ export default {
 #llm {
   border: 2px solid white;
   border-radius: 10px;
-  height: 70vh;
-  width: 70vh;
+  width: 100%;
+  height: 100%;
   justify-self: center;
   grid-column: 2;
   grid-row: 2;

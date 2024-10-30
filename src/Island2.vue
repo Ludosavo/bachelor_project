@@ -1,18 +1,21 @@
 <script>
-import ChatGPT from "./components/icons/ChatGPT.vue";
+import ChatGPT from "./components/ChatGPT.vue";
+import GoogleCSE from "./components/GoogleCSE.vue";
 export default {
   components: {
     ChatGPT,
+    GoogleCSE,
   },
 };
 </script>
 
 <template>
-  <main id="island1">
+  <main class="island1">
+    <div class="question_card">Domanda:</div>
     <div id="search_engine">
       <div class="engine">Google:</div>
       <br />
-      <div class="gcse-searchbox-only"></div>
+      <GoogleCSE/>
     </div>
     <div id="llm">
       <div class="engine">ChatGPT:</div>
@@ -24,12 +27,22 @@ export default {
 </template>
 
 <style scoped>
-#island1 {
+.island1 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 80vh;
+  height: auto;
   align-items: center;
 }
+
+.question_card {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  justify-self: center;
+  border: 2px solid white;
+  border-radius: 3px;
+  font-size: 35px;
+}
+
 .engine {
   align-content: center;
   font-size: 50px;
@@ -38,12 +51,22 @@ export default {
 }
 
 #search_engine {
+  border: 2px solid white;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
   grid-column: 1;
+  grid-row: 2;
   justify-self: center;
 }
 
 #llm {
+  border: 2px solid white;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
   justify-self: center;
   grid-column: 2;
+  grid-row: 2;
 }
 </style>

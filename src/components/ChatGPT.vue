@@ -20,7 +20,7 @@
 
 <script>
 import axios from "axios";
-
+// import { askToChatGpt } from "@/config/chatgptcontroller";
 export default {
   data() {
     return {

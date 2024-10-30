@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="results">
     <input
       type="text"
       v-model="query"
@@ -38,7 +38,7 @@ export default {
     async performSearch() {
       if (!this.query) return;
 
-      const API_KEY = "YOUR_API_KEY"; // Replace with your actual API Key
+      const API_KEY = "AIzaSyD6BwDsOxp2WT8vOn9wM832djLqsqzxYnM"; // Replace with your actual API Key
       const CX = "c5090c2a5c6884f0e"; // Replace with your Search Engine ID
 
       try {
@@ -69,8 +69,9 @@ export default {
 </script>
 
 <style scoped>
-/* Basic styling for the search results */
+
 input {
+  align-self: center;
   padding: 8px;
   margin-right: 8px;
   width: 300px;
@@ -83,6 +84,20 @@ ul {
   padding: 0;
 }
 li {
+  font-size: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+  width: 80%;
+  color: rgb(0, 0, 0);
   margin: 16px 0;
+}
+
+li a{
+  color:rgb(4, 42, 103);
+}
+
+li :visited{
+  color: rgb(106, 8, 8);
 }
 </style>
