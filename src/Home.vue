@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+// import { byPrefixAndName } from '@awesome.me/kit-solid/icons'
+
+</script>
 
 <template>
   <div class="ocean">
@@ -23,8 +27,7 @@
           color: rgb(245, 245, 245);
           justify-items: center;">
         <img id="image" src="/base_island.png" alt="image" />
-        <div>Clicca qui per iniziare il gioco</div>
-        <font-awesome-icon :icon="['fas', 'arrow-right']" />
+        <div>Clicca qui per iniziare il gioco </div><font-awesome-icon icon="fa-solid fa-arrow-right"/>
       </RouterLink>
     </main>
   </div>

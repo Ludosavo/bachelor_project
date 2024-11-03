@@ -84,17 +84,17 @@ ul {
   padding: 0;
 }
 li {
-  font-size: 20px;
+  font-size: 25px;
   border: 1px solid black;
   border-radius: 10px;
   text-align: center;
   width: 80%;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   margin: 16px 0;
 }
 
 li a{
-  color:rgb(4, 42, 103);
+  color:rgb(4, 27, 63);
 }
 
 li :visited{

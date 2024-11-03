@@ -13,124 +13,173 @@
     <div class="bubble bubble--11"></div>
     <div class="bubble bubble--12"></div>
     <main id="islands">
-      <RouterLink to="/island1" id="isla1" style="text-decoration: none">
+      <RouterLink to="/island/1/1" id="isla1" style="text-decoration: none">
         <img
           src="/island1.png"
           alt="island1"
         />
         <div class="subjects">SPORT</div>
       </RouterLink>
-      <RouterLink to="/island2" id="isla2" style="text-decoration: none">
+      <RouterLink to="/island/2/1" id="isla2" style="text-decoration: none">
         <img
           src="/island2.png"
           alt="island2"
         />
-        <div class="subjects">TEMPO LIBERO</div>
+        <div class="subjects">NATURA</div>
       </RouterLink>
-      <RouterLink to="/island3" id="isla3" style="text-decoration: none">
+      <RouterLink to="/island/3/1" id="isla3" style="text-decoration: none">
         <img
           src="/island3.png"
           alt="island3"
         />
         <div class="subjects">GEOGRAFIA</div>
       </RouterLink>
-      <RouterLink to="/island4" id="isla4" style="text-decoration: none">
+      <RouterLink to="/island/4/1" id="isla4" style="text-decoration: none">
         <img
           src="/island4.png"
           alt="island4"
         />
-        <div class="subjects">SCIENZA E NATURA</div>
+        <div class="subjects">SCIENZA</div>
+      </RouterLink>
+      <RouterLink to="/island/5/1" id="isla5" style="text-decoration: none">
+        <img
+          src="/island5.png"
+          alt="island5"
+          style="height: 500px; width: 500px;"
+        />
+        <div class="subjects">TESORO</div>
       </RouterLink>
     </main>
   </div>
 </template>
 
 <style scoped>
-@keyframes animateSprite {
-  0% {
-    background-position: -600px; /* Starting position moving left sprite */
+  #islands {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    height:100%;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
   }
-  20% {
-    background-position: 0px; /* Straight on sprite */
+  
+  #isla1 {
+    grid-column: 1;
+    grid-row: 2;
   }
-  25% {
-    background-position: -200px; /* Moving up sprite */
+  
+  #isla2 {
+    grid-column: 1;
+    grid-row: 1;
   }
-  35% {
-    background-position: -400px; /* Moving right sprite */
+  
+  #isla3 {
+    grid-column: 3;
+    grid-row: 1;
   }
-  40% {
-    background-position: -400px;
+  
+  #isla4 {
+    grid-column:3;
+    grid-row: 2;
   }
-  50% {
-    background-position: -200px; /* Moving up sprite */
+  #isla5 {
+    grid-column: 2;
+    grid-row: 1/ span 2;
   }
-  60% {
-    background-position: -0px; /* Straight on sprite */
+  
+  .subjects {
+    font-size: 40px;
+    text-align: center;
+    text-decoration: none;
+    color: bisque;
   }
-  67% {
-    background-position: -600px; /* Moving up sprite */
+  
+  #islands img{
+    width: 300px;
+    height: 300px;
+    aspect-ratio: 2/3;
   }
-
-  100% {
-    background-position: -600px;
+  
+  @keyframes animateSprite {
+    0% {
+      background-position: -600px; /* Starting position moving left sprite */
+    }
+    20% {
+      background-position: 0px; /* Straight on sprite */
+    }
+    25% {
+      background-position: -200px; /* Moving up sprite */
+    }
+    35% {
+      background-position: -400px; /* Moving right sprite */
+    }
+    40% {
+      background-position: -400px;
+    }
+    50% {
+      background-position: -200px; /* Moving up sprite */
+    }
+    60% {
+      background-position: -0px; /* Straight on sprite */
+    }
+    67% {
+      background-position: -600px; /* Moving up sprite */
+    }
+  
+    100% {
+      background-position: -600px;
+    }
   }
-}
-
-@keyframes swim {
-  0% {
-    transform: translate(0, 0); /* Starting position */
-  }
-  20% {
-    transform: translate(
-      calc(-50vw - 100px),
-      0
-    ); /* Animate to center of screen */
-  }
-  25% {
-    transform: translate(
-      calc(-50vw - 100px),
-      0
-    ); /* Stay at the center for 1 second */
-  }
-  35% {
-    transform: translate(
-      calc(-50vw - 100px),
-      -20vh
-    ); /* Animate up for 2 seconds */
-  }
-  50% {
-    transform: translate(-25vw, 15vh); /* Animate bottom right for 3 seconds */
-  }
-  60% {
-    transform: translate(-25vw, -20vh); /* Animate up at right of the screen */
-  }
-  67% {
-    transform: translate(-25vw, -20vh);
-  }
-
-  100% {
-    transform: translate(
-      calc(-100vw - 300px),
-      0
-    ); /* Animate past left past the screen */
-  }
-}
-.ocean {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(0deg, #182848, #2980b9);
-}
-
-#islands img{
-  width: 300px;
-  height: 300px;
-  aspect-ratio: 2/3;
-}
-
-.bubble {
-  width: 30px;
+  
+  @keyframes swim {
+    0% {
+      transform: translate(0, 0); /* Starting position */
+    }
+    20% {
+      transform: translate(
+        calc(-50vw - 100px),
+        0
+      ); /* Animate to center of screen */
+    }
+    25% {
+      transform: translate(
+        calc(-50vw - 100px),
+        0
+      ); /* Stay at the center for 1 second */
+    }
+    35% {
+      transform: translate(
+        calc(-50vw - 100px),
+        -20vh
+      ); /* Animate up for 2 seconds */
+    }
+    50% {
+      transform: translate(-25vw, 15vh); /* Animate bottom right for 3 seconds */
+    }
+    60% {
+      transform: translate(-25vw, -20vh); /* Animate up at right of the screen */
+    }
+    67% {
+      transform: translate(-25vw, -20vh);
+    }
+    
+    100% {
+      transform: translate(
+        calc(-100vw - 300px),
+        0
+        ); /* Animate past left past the screen */
+      }
+    }
+    .ocean {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(0deg, #182848, #2980b9);
+    }
+  .bubble {
+    width: 30px;
   height: 30px;
   border-radius: 100%;
   position: absolute;
@@ -261,39 +310,4 @@
   opacity: 0.3;
 }
 
-#islands {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 1fr;
-  justify-items: center;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-}
-
-#isla1 {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-#isla2 {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-#isla3 {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-#isla4 {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-.subjects {
-  font-size: 40px;
-  text-decoration: none;
-  color: bisque;
-}
 </style>
