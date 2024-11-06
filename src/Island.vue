@@ -1,40 +1,47 @@
 <script>
-// import ChatBox from "@/components/ChatBox.vue";
 import ChatGPT from "@/components/ChatGPT.vue";
 import GoogleCSE from "@/components/GoogleCSE.vue";
-import { useAuthStore } from '@/stores/authStore';
 import questions from "@/config/questions";
 
-const authStore = useAuthStore();
 export default {
   components: {
     ChatGPT,
     GoogleCSE,
   },
   computed: {
-    question: function() {
+    question() {
       return questions[this.$route.params.id][this.$route.params.question]
     }
   },
   // function that saves answer
   methods: {
     submit_answer() {
+      
       const inputArray = [];
       const inputValue = document.getElementById("inputField").value;
-      console.log("ciccia");
 
       // Check if input is not empty before saving
       if (inputValue.trim() !== "") {
         inputArray.push(inputValue);
         document.getElementById("inputField").value = "";
-        // document.getElementById("output").innerText = `Array contents: ${inputArray.join(", ")}`;
+      
+        store.addQuestionAnswer(this.question, answer);
+
       } else {
         alert("Inserisci una risposta prima di proseguire");
       }
-    }
+    },
+    updateCurrentQuestionInStore() {
+      const store = useDataStore();
+      store.setCurrentQuestion(this.question); // Set the current question in the store
+    },
+  },
+  mounted(){
+    this.updateCurrentQuestionInStore(); // Call this when the component mounts
   }
 }
 </script>
+
 
 <template>
   <main :class="'island'+this.$route.params.id">
@@ -46,7 +53,7 @@ export default {
       <h2>Risposta:</h2>
       <div id="input_button">
         <input type="text" id="inputField" />
-        <button class="submit" @click="authStore.submit_answer()">Invia</button>
+        <button class="submit" @click="store.submit_answer()">Invia</button>
       </div>
     </div>
     <div id="search_engine">
