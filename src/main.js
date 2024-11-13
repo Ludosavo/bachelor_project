@@ -4,14 +4,18 @@ import { createApp } from 'vue'
 import App from '@/App.vue'
 import router from '@/config/router'
 import { createPinia } from 'pinia'
-import { useDataStore } from '@/stores/store'
+
+// Import the Font Awesome core
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+// Import Font Awesome icon component
+import { faArrowRight, faHouse} from '@fortawesome/free-solid-svg-icons'
 
 const pinia = createPinia()
 const app = createApp(App)
 
 
+library.add(faArrowRight, faHouse);
 app.use(router)
 app.use(pinia)
 app.mount('#app')
-
-const dataStore = useDataStore();

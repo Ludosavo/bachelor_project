@@ -1,6 +1,10 @@
-<script setup lang="ts">
+<script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-// import { byPrefixAndName } from '@awesome.me/kit-solid/icons'
+export default {
+  components: {
+    FontAwesomeIcon,
+  },
+}
 
 </script>
 
@@ -19,7 +23,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
     <div class="bubble bubble--11"></div>
     <div class="bubble bubble--12"></div>
     <main>
-      <h1>BENVENUTO SULL'ISOLA DELLA CONOSCENZA!</h1>
+      <h1>L'ISOLA DELLA CONOSCENZA!</h1>
       <RouterLink
         to="/islands"
         style="
@@ -27,7 +31,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
           color: rgb(245, 245, 245);
           justify-items: center;">
         <img id="image" src="/base_island.png" alt="image" />
-        <div>Clicca qui per iniziare il gioco </div><font-awesome-icon icon="fa-solid fa-arrow-right"/>
+        <div>Clicca qui per iniziare il gioco <font-awesome-icon icon="arrow-right" style="font-size:smaller"/></div> 
       </RouterLink>
     </main>
   </div>

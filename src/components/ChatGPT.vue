@@ -9,9 +9,11 @@
         </div>
       </div>
       <input
+        id="chat-text"
+        style="height: 50%; width: 100%"
         v-model="userInput"
         @keyup.enter="sendMessage"
-        placeholder="Scrivi qui la tua domanda..."
+        placeholder="Scrivi qui la tua domanda.."
       />
       <button @click="sendMessage">CERCA</button>
     </div>
@@ -78,7 +80,6 @@ export default {
 
 <style>
 input {
-  height: 25px;
   border: 1px solid rgb(0, 0, 0);
   border-radius: 5px;
 }
@@ -91,9 +92,8 @@ button {
 .chat-box {
   text-align: center;
   justify-self: center;
-  width: 400px;
+  width: 90%;
 }
-
 .messages {
   max-height: 200px;
   overflow-y: auto;

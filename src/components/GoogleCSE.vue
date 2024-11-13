@@ -1,19 +1,18 @@
 <template>
   <div class="results">
-    <input
-      type="text"
+    <input type="text" style="width: 90%;"
       v-model="query"
       @keyup.enter="performSearch"
       placeholder="Search..."
     />
-    <button @click="performSearch">Search</button>
+    <button @click="performSearch">Cerca</button>
 
     <div v-if="results">
       <h3>Search Results:</h3>
       <ul>
         <li v-for="result in results" :key="result.cacheId">
           <a :href="result.link" target="_blank">{{ result.title }}</a>
-          <p>{{ result.snippet }}</p>
+          <p>{{result.snippet}}</p>
         </li>
       </ul>
     </div>
@@ -32,6 +31,7 @@ export default {
       query: "",
       results: null,
       noResults: false,
+
     };
   },
   methods: {
@@ -55,6 +55,7 @@ export default {
 
         if (response.data.items && response.data.items.length > 0) {
           this.results = response.data.items;
+          console.log(this.query);
           this.noResults = false;
         } else {
           this.results = null;
@@ -74,7 +75,7 @@ input {
   align-self: center;
   padding: 8px;
   margin-right: 8px;
-  width: 300px;
+  width: 90%;
 }
 button {
   padding: 8px 12px;

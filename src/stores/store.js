@@ -1,10 +1,13 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
-export const useDataStore = defineStore('data', {
+// Reminder: 'data' parameter is the unique id of the store
+export const useDataStore = defineStore("data", {
   // State holds the data
   state: () => ({
     questionAnswers: [], // Array to store question-answer pairs
     currentQuestion: null, // Store the current question
+    search_time: null,
+    score: null,
   }),
 
   // Actions define methods to manipulate the state
@@ -18,11 +21,16 @@ export const useDataStore = defineStore('data', {
       this.currentQuestion = question;
     },
 
-    // Optionally, an action to retrieve all question-answer pairs
+    // To retrieve all question-answer pairs
     getAllQuestionAnswers() {
       return this.questionAnswers;
     },
+
+    computeSearchTime() {
+      if ( setTimeout(function () { }, 120000)) {
+        return (this.score = 100);
+      }
+    },
   },
-  getters:{
-  },
+  getters: {},
 });
