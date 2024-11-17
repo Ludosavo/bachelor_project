@@ -1,6 +1,8 @@
 <template>
   <div class="results">
-    <input type="text" style="width: 90%;"
+    <input
+      type="text"
+      style="width: 90%"
       v-model="query"
       @keyup.enter="performSearch"
       placeholder="Search..."
@@ -12,7 +14,7 @@
       <ul>
         <li v-for="result in results" :key="result.cacheId">
           <a :href="result.link" target="_blank">{{ result.title }}</a>
-          <p>{{result.snippet}}</p>
+          <p>{{ result.snippet }}</p>
         </li>
       </ul>
     </div>
@@ -31,13 +33,16 @@ export default {
       query: "",
       results: null,
       noResults: false,
-
+      startTime: null,
     };
   },
   methods: {
     async performSearch() {
       if (!this.query) return;
 
+      if (!this.startTime) {
+        this.startTime = new Date();
+      }
       const API_KEY = "AIzaSyD6BwDsOxp2WT8vOn9wM832djLqsqzxYnM"; // Replace with your actual API Key
       const CX = "c5090c2a5c6884f0e"; // Replace with your Search Engine ID
 
@@ -57,6 +62,10 @@ export default {
           this.results = response.data.items;
           console.log(this.query);
           this.noResults = false;
+
+          // Computing the time
+          this.computeSearchTime();
+          
         } else {
           this.results = null;
           this.noResults = true;
@@ -65,40 +74,120 @@ export default {
         console.error("Error fetching search results:", error);
       }
     },
+    computeSearchTime() {
+      const elapsedTime = new Date() - this.startTime; 
+
+      if (elapsedTime < 120000) {
+        // Controlla se sotto i 2 minuti
+        this.score += 10;
+      } else {
+        this.score += 5;
+      }
+
+      // saving in store
+      const dataStore = useDataStore(); 
+      if (elapsedTime < 120000) { 
+        dataStore.incrementScore(10); 
+      } else {
+        dataStore.incrementScore(5);
+      }
+      // Resetta il tempo di inizio per future ricerche
+      this.startTime = null;
+    },
   },
 };
 </script>
 
-<style scoped>
+<style>
+/* Contenitore principale centrato */
+.results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: var(--background-page);
+}
+
+/* Barra di ricerca */
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 90%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
 
 input {
-  align-self: center;
-  padding: 8px;
-  margin-right: 8px;
-  width: 90%;
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
+
 button {
-  padding: 8px 12px;
+  padding: 6px 20px;
+  background-color: var(--red-coral);
+  color: var(--white-cloud);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
 }
+
+button:hover {
+  background-color: #b32734;
+}
+
+/* Lista dei risultati */
+.results {
+  text-align: center;
+  width: 90%;
+  max-width: 800px;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
+
 li {
-  font-size: 25px;
-  border: 1px solid black;
+  margin-bottom: 15px;
+  padding: 15px;
+  background-color: var(--background-cards);
   border-radius: 10px;
-  text-align: center;
-  width: 80%;
-  color: rgb(255, 255, 255);
-  margin: 16px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-li a{
-  color:rgb(4, 27, 63);
+li a {
+  font-size: 25px;
+  color: rgb(4, 27, 63);
+  text-decoration: none;
+  font-weight: bold;
 }
 
-li :visited{
+li a:visited {
   color: rgb(106, 8, 8);
+}
+
+li p {
+  margin: 10px 0 0 0;
+  font-size: 22px;
+  color: #333;
+}
+
+h3 {
+  color: var(--red-coral);
+  margin-bottom: 20px;
+}
+
+/* No risultati */
+.no-results {
+  font-size: 20px;
+  color: var(--red-coral);
 }
 </style>

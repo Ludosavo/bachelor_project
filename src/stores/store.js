@@ -6,8 +6,7 @@ export const useDataStore = defineStore("data", {
   state: () => ({
     questionAnswers: [], // Array to store question-answer pairs
     currentQuestion: null, // Store the current question
-    search_time: null,
-    score: null,
+    score: 0,
   }),
 
   // Actions define methods to manipulate the state
@@ -25,11 +24,11 @@ export const useDataStore = defineStore("data", {
     getAllQuestionAnswers() {
       return this.questionAnswers;
     },
-
-    computeSearchTime() {
-      if ( setTimeout(function () { }, 120000)) {
-        return (this.score = 100);
-      }
+    setScore(newScore) {
+      this.score = newScore;
+    },
+    incrementScore(points) {
+      this.score += points;
     },
   },
   getters: {},
