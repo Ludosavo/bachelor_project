@@ -1,77 +1,69 @@
 <template>
-  <div class="chatgpt">
+  <div class="chat-container">
     <div class="chat-box">
-      <div class="messages">
-        <div v-for="(message, index) in messages" :key="index" class="message">
-          <strong v-if="message.role === 'user'">TU:</strong>
+      <ul>
+        <li v-for="(message, index) in messages" :key="index" :class="message.role">
+          <strong v-if="message.role === 'user'">You:</strong>
           <strong v-else>ChatGPT:</strong>
-          <p>{{ message.content }}</p>
-        </div>
-      </div>
-      <input
-        id="chat-text"
-        style="height: 50%; width: 100%"
-        v-model="userInput"
-        @keyup.enter="sendMessage"
-        placeholder="Scrivi qui la tua domanda.."
-      />
-      <button @click="sendMessage">CERCA</button>
+          {{ message.content }}
+        </li>
+      </ul>
     </div>
+    <textarea
+      v-model="userMessage"
+      placeholder="Scrivi un messaggio..."
+      @keyup.enter="sendMessage"
+    ></textarea>
+    <button @click="sendMessage">Invia</button>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-// import { askToChatGpt } from "@/config/chatgptcontroller";
+
 export default {
   data() {
     return {
-      userInput: "",
-      messages: [],
+      userMessage: "", // Messaggio dell'utente
+      messages: [],    // Array per tenere traccia della conversazione
     };
   },
   methods: {
     async sendMessage() {
-      if (!this.userInput.trim()) return;
+      if (!this.userMessage.trim()) return;
 
-      // Add user's message to the messages list
-      this.messages.push({
-        role: "user",
-        content: this.userInput,
-      });
+      // Aggiungi il messaggio dell'utente
+      this.messages.push({ role: "user", content: this.userMessage });
 
       try {
-        // Make a request to OpenAI API
         const response = await axios.post(
           "https://api.openai.com/v1/chat/completions",
           {
-            model: "gpt-3.5-turbo",
+            model: "gpt-3.5-turbo", // Modello da usare
             messages: [
-              { role: "system", content: "You are a helpful assistant." },
-              ...this.messages,
-              { role: "user", content: this.userInput },
-            ],
+              ...this.messages.map((msg) => ({
+                role: msg.role,
+                content: msg.content,
+              })),
+            ], // Passa l'intera conversazione
           },
           {
             headers: {
-              //inserito chiave
-              Authorization: `Bearer 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`,
               "Content-Type": "application/json",
+              Authorization: `Bearer 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`, // Sostituisci con la tua chiave API
             },
           }
         );
 
-        // Add ChatGPT's response to the messages list
-        const reply = response.data.choices[0].message.content;
-        this.messages.push({
-          role: "assistant",
-          content: reply,
-        });
+        // Aggiungi la risposta di ChatGPT
+        const gptMessage = response.data.choices[0].message.content;
+        this.messages.push({ role: "assistant", content: gptMessage });
 
-        // Clear the user input field
-        this.userInput = "";
+        // Resetta l'input dell'utente
+        this.userMessage = "";
       } catch (error) {
-        console.error("Error communicating with ChatGPT API:", error);
+        console.error("Errore durante la richiesta a ChatGPT:", error);
+        alert("Si è verificato un errore, riprova più tardi.");
       }
     },
   },
@@ -79,28 +71,50 @@ export default {
 </script>
 
 <style>
-input {
-  border: 1px solid rgb(0, 0, 0);
-  border-radius: 5px;
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
 }
 
-button {
-  border: 1px solid rgb(0, 0, 0);
-  border-radius: 5px;
-  height: 31px;
-}
 .chat-box {
-  text-align: center;
-  justify-self: center;
   width: 90%;
-}
-.messages {
-  max-height: 200px;
-  overflow-y: auto;
+  max-height: 400px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  padding: 10px;
   margin-bottom: 10px;
 }
 
-.message {
-  margin-bottom: 20px;
+textarea {
+  width: 90%;
+  height: 50px;
+  margin-top: 10px;
+  resize: none;
+}
+
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+
+.user {
+  text-align: right;
+  color: blue;
+}
+
+.assistant {
+  text-align: left;
+  color: green;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
 }
 </style>

@@ -30,6 +30,9 @@ export const useDataStore = defineStore("data", {
     incrementScore(points) {
       this.score += points;
     },
+    export() {
+      download(JSON.stringify(this.questionAnswers), `${Date.now()}.json`, 'text/json');
+  }
   },
-  getters: {},
+  
 });

@@ -4,6 +4,7 @@ import ChatGPT from "@/components/ChatGPT.vue";
 import GoogleCSE from "@/components/GoogleCSE.vue";
 import questions from "@/config/questions";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import HuggingFace from "./components/HuggingFace.vue";
 
 export default {
   setup() {
@@ -14,6 +15,7 @@ export default {
   components: {
     ChatGPT,
     GoogleCSE,
+    HuggingFace,
     FontAwesomeIcon,
   },
   computed: {
@@ -21,6 +23,7 @@ export default {
       return questions[this.$route.params.id][this.$route.params.question];
     },
     scoreText() {
+      // console.log(this.$route.params.)
       return this.$route.params.score ;
     },
 
@@ -34,7 +37,6 @@ export default {
       // Check if input is not empty before saving
       if (inputValue.trim() !== "") {
         inputArray.push(inputValue);
-        // document.getElementById("inputField").value = "";
         this.dataStore.addQuestionAnswer(this.question, inputValue);
         inputField.value = " ";
       } else {
@@ -74,7 +76,7 @@ export default {
     </div>
     <div id="score">
       <h2>Punteggio:</h2>
-      <p>{{ scoreText }}</p>
+      <p>{{this.$route.params.score}}</p>
     </div>
     <button id="next_question">
       <RouterLink

@@ -7,7 +7,6 @@ import { createPinia } from 'pinia'
 
 // Import the Font Awesome core
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 // Import Font Awesome icon component
 import { faArrowRight, faHouse} from '@fortawesome/free-solid-svg-icons'
 
