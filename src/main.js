@@ -8,13 +8,13 @@ import { createPinia } from 'pinia'
 // Import the Font Awesome core
 import { library } from '@fortawesome/fontawesome-svg-core';
 // Import Font Awesome icon component
-import { faArrowRight, faHouse} from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight, faHouse, faDownload} from '@fortawesome/free-solid-svg-icons'
 
 const pinia = createPinia()
 const app = createApp(App)
 
 
-library.add(faArrowRight, faHouse);
+library.add(faArrowRight, faHouse, faDownload);
 app.use(router)
 app.use(pinia)
 app.mount('#app')

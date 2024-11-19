@@ -63,7 +63,7 @@ export default {
       console.log("before", this.dataStore.isComplete);
       this.dataStore.setCompletion();
       console.log("after", this.dataStore.isComplete);
-    }
+    },
   },
 };
 </script>
@@ -76,25 +76,28 @@ export default {
     </div>
     <div class="answer_card">
       <h2>Risposta:</h2>
-      <textarea placeholder="Scrivi qui la risposta" id="inputField"></textarea>
+      <textarea placeholder="Scrivi qui la risposta" id="inputField">
+      </textarea>
       <div id="input_button">
         <button class="submit" @click="this.submit_answer()">Invia</button>
       </div>
     </div>
-    <div id="search_engine" v-if="$route.params.question % 2 !== 0">
+    <div id="search_engine">
       <div class="engine">Google:</div>
       <div class="searching">
         <GoogleCSE />
       </div>
     </div>
-    <div id="llm" v-else>
+    <div id="llm">
       <div class="engine">ChatGPT:</div>
       <ChatGPT />
     </div>
     <div id="score">
       <h2>Punteggio:</h2>
       <h2>{{ this.dataStore.score }}</h2>
-      <!-- <p @click="this.dataStore.export">DOWNLOAD</p> -->
+    </div>
+    <div id="download" @click="this.dataStore.export">
+        <font-awesome-icon icon="download" style="font-size: xx-large;"/>
     </div>
     <RouterLink
       :to="`/island/${this.$route.params.id}/${
@@ -174,21 +177,39 @@ export default {
 }
 
 .answer_card h2 {
+  grid-row: 1;
   color: var(--red-coral);
   text-align: center;
 }
 
 .answer_card #input_button {
+  grid-row: 2;
+  grid-column: 5;
   justify-self: center;
 }
 
 .answer_card #inputField {
+  grid-row: 2;
   border-radius: 8px;
   justify-self: center;
   align-self: center;
   margin-left: 25px;
-  width: 95.5%;
+  width: 90%;
   overflow: scroll;
+}
+#download {
+  grid-column: 3;
+  grid-row: 1;
+  display: flex;
+  color: var(--red-coral);
+  background-color: var(--background-cards);
+  padding: 5px;
+  width: 30%;
+  border-radius: 4px;
+  align-self: center;
+  justify-self: center;
+  justify-content: space-around;
+  align-items: flex-end;
 }
 
 #score {
@@ -201,7 +222,6 @@ export default {
   width: 100%;
   border-radius: 4px;
   align-self: flex-start;
-
   justify-content: space-around;
   align-items: flex-end;
 }

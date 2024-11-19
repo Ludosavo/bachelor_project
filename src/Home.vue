@@ -140,8 +140,8 @@ main {
 main #image {
   grid-row: 2;
   grid-column: 1;
-  width: 300px;
-  height:300px;
+  width: 500px;
+  height:500px;
 }
 
 h1 {

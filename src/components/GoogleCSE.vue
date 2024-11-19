@@ -13,7 +13,7 @@
       <h3>Search Results:</h3>
       <ul>
         <li v-for="result in results" :key="result.cacheId">
-          <a :href="result.link" target="_blank">{{ result.title }}</a>
+          <a :href="result.link" @click="saveLink" target="_blank">{{ result.title }}</a>
           <p>{{ result.snippet }}</p>
         </li>
       </ul>
@@ -26,7 +26,7 @@
 
 <script>
 import axios from "axios";
-
+import { useDataStore } from "@/stores/store";
 export default {
   data() {
     return {
@@ -62,7 +62,7 @@ export default {
           this.results = response.data.items;
           console.log(this.query);
           this.noResults = false;
-
+          console.log(this.results);
           // Computing the time
           this.computeSearchTime();
           
@@ -94,6 +94,10 @@ export default {
       // Resetta il tempo di inizio per future ricerche
       this.startTime = null;
     },
+    saveLink(e) {
+      searchedLink = e.target.href;
+      this.dataStore.addVisitedLink(searchedLink);
+    }
   },
 };
 </script>
@@ -144,6 +148,7 @@ button:hover {
 
 /* Lista dei risultati */
 .results {
+  margin-top: 20px;
   text-align: center;
   width: 90%;
   max-width: 800px;

@@ -17,6 +17,7 @@
         <img
           src="/island1.png"
           alt="island1"
+          style="height: 350px; width: 350px;"
         />
         <div class="subjects">SPORT</div>
       </RouterLink>
@@ -24,6 +25,7 @@
         <img
           src="/island2.png"
           alt="island2"
+          style="height: 350px; width: 350px;"
         />
         <div class="subjects">NATURA</div>
       </RouterLink>
@@ -31,6 +33,7 @@
         <img
           src="/island3.png"
           alt="island3"
+          style="height: 350px; width:350px;"
         />
         <div class="subjects">GEOGRAFIA</div>
       </RouterLink>
@@ -38,14 +41,15 @@
         <img
           src="/island4.png"
           alt="island4"
+          style="height: 350px; width: 350px;"
         />
         <div class="subjects">SCIENZA</div>
       </RouterLink>
-      <RouterLink to="/island/5/1" id="isla5" style="text-decoration: none">
+      <RouterLink to="/islands/treasure" id="isla5" style="text-decoration: none">
         <img
           src="/island5.png"
           alt="island5"
-          style="height: 500px; width: 500px;"
+          style="height: 350px; width: 350px;"
         />
         <div class="subjects">TESORO</div>
       </RouterLink>
