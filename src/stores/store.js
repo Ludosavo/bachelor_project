@@ -10,6 +10,7 @@ export const useDataStore = defineStore("data", {
     currentQuestion: null, // Store the current question
     score: 0,
     isComplete: false,
+    islandComplete: false,
   }),
 
   // Actions define methods to manipulate the state
@@ -43,6 +44,7 @@ export const useDataStore = defineStore("data", {
           {
             answers: this.questionAnswers,
             score: this.score,
+            visitedLinks : this.visitedLinks,
           },
           null,
           4

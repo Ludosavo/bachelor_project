@@ -68,56 +68,70 @@ export default {
 </script>
 
 <template>
-  <main :class="'island'">
-    <div class="question_card">
-      <h2>Domanda:</h2>
-      <p>{{ this.questionsStore.currentQuestion }}</p>
-    </div>
-    <div class="answer_card">
-      <h2>Risposta:</h2>
-      <textarea placeholder="Scrivi qui la risposta" id="inputField">
-      </textarea>
-      <div id="input_button">
-        <button class="submit" @click="this.submit_answer()">Invia</button>
+  <div class="ocean">
+    <div class="bubble bubble--1"></div>
+    <div class="bubble bubble--2"></div>
+    <div class="bubble bubble--3"></div>
+    <div class="bubble bubble--4"></div>
+    <div class="bubble bubble--5"></div>
+    <div class="bubble bubble--6"></div>
+    <div class="bubble bubble--7"></div>
+    <div class="bubble bubble--8"></div>
+    <div class="bubble bubble--9"></div>
+    <div class="bubble bubble--10"></div>
+    <div class="bubble bubble--11"></div>
+    <div class="bubble bubble--12"></div>
+    <main :class="'island'">
+      <div class="question_card">
+        <h2>Domanda:</h2>
+        <p>{{ this.questionsStore.currentQuestion }}</p>
       </div>
-    </div>
-    <div id="search_engine">
-      <div class="engine">Google:</div>
-      <div class="searching">
-        <GoogleCSE />
+      <div class="answer_card">
+        <h2>Risposta:</h2>
+        <textarea placeholder="Scrivi qui la risposta" id="inputField">
+        </textarea>
+        <div id="input_button">
+          <button class="submit" @click="this.submit_answer()">Invia</button>
+        </div>
       </div>
-    </div>
-    <div id="llm">
-      <div class="engine">ChatGPT:</div>
-      <ChatGPT />
-    </div>
-    <div id="score">
-      <h2>Punteggio:</h2>
-      <h2>{{ this.dataStore.score }}</h2>
-    </div>
-    <div id="download" @click="this.dataStore.export">
-        <font-awesome-icon icon="download" style="font-size: xx-large;"/>
-    </div>
-    <RouterLink
-      :to="`/island/${this.$route.params.id}/${
-        parseInt(this.$route.params.question) + 1
-      }`"
-      id="next_question"
-      v-if="!this.questionsStore.isLast"
-    >
-      <font-awesome-icon
-        icon="arrow-right"
-        style="font-size: xx-large; color: var(--red-coral)"
-      />
-    </RouterLink>
-    <RouterLink :to="`/islands`" id="next_question" v-else @click="completed">
-      <font-awesome-icon
-        icon="house"
-        style="font-size: xx-large; color: var(--red-coral)"
-      />
-    </RouterLink>
-  </main>
-  <RouterView />
+      <div id="search_engine">
+        <div class="engine">Google:</div>
+        <div class="searching">
+          <GoogleCSE />
+        </div>
+      </div>
+      <div id="llm">
+        <div class="engine">GeminiAI:</div>
+        <GeminiAI/>
+      </div>
+      <div id="score">
+        <h2>Punteggio:</h2>
+        <h2>{{ this.dataStore.score }}</h2>
+      </div>
+      <div id="download" @click="this.dataStore.export">
+        <font-awesome-icon icon="download" style="font-size: xx-large" />
+      </div>
+      <RouterLink
+        :to="`/island/${this.$route.params.id}/${
+          parseInt(this.$route.params.question) + 1
+        }`"
+        id="next_question"
+        v-if="!this.questionsStore.isLast"
+      >
+        <font-awesome-icon
+          icon="arrow-right"
+          style="font-size: xx-large; color: var(--red-coral)"
+        />
+      </RouterLink>
+      <RouterLink :to="`/islands`" id="next_question" v-else @click="completed">
+        <font-awesome-icon
+          icon="house"
+          style="font-size: xx-large; color: var(--red-coral)"
+        />
+      </RouterLink>
+    </main>
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
@@ -226,7 +240,7 @@ export default {
 }
 
 .engine {
-  color: var(--red-coral);
+  color: var(--background-cards);
   align-content: center;
   font-size: 50px;
   justify-self: center;

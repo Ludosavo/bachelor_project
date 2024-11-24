@@ -45,38 +45,40 @@ const fetchAnswer = async () => {
 </script>
 
 <style lang="scss" scoped>
-.mb-5{
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    width: 100%;
-    justify-content: center;
-    justify-self: center;
-
+.mb-5 {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  width: 100%;
+  justify-content: center;
+  justify-self: center;
 }
-h1.mb-5{
+h1.mb-5 {
   grid-row: 2;
   margin-bottom: 2rem;
   justify-self: center;
   color: #e63946;
 }
-textarea#question{
+textarea#question {
   grid-row: 3;
   grid-column: 1;
   justify-self: center;
   height: 40px;
-  width: 100%;
+  width: 90%;
   border-radius: 4px;
 }
 .mb-10 {
   grid-row: 4;
   margin-bottom: 5rem;
   justify-self: center;
-  color: #e63946;
+  width: 80%;
+  border: 2px solid black;
+  color: black;
+  font-size: 25px;
 }
 
 button#ask {
-    grid-column: 1;
-    justify-self: center;
+  grid-column: 1;
+  justify-self: center;
 }
 </style>
