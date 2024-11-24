@@ -8,7 +8,7 @@ import TreasureIsland from "@/TreasureIsland.vue";
 const routes = [
   { path: "/", component: Home },
   { path: "/islands", component: Islands },
-  { path: "/island/treasure", component: TreasureIsland },
+  { path: "/islands/treasure", component: TreasureIsland },
   { path: "/island/:id/:question", component: Island },
 ];
 

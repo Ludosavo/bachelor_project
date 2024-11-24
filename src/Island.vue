@@ -1,11 +1,9 @@
 <script>
 import { useDataStore } from "@/stores/store";
 import { useQuestionsStore } from "@/stores/questions";
-import ChatGPT from "@/components/ChatGPT.vue";
 import GoogleCSE from "@/components/GoogleCSE.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-// import HuggingFace from "./components/HuggingFace.vue";
-
+import GeminiAI from "./components/GeminiAI.vue";
 export default {
   setup() {
     const dataStore = useDataStore();
@@ -29,7 +27,7 @@ export default {
     );
   },
   components: {
-    ChatGPT,
+    GeminiAI,
     GoogleCSE,
     FontAwesomeIcon,
   },
@@ -63,12 +61,25 @@ export default {
       console.log("before", this.dataStore.isComplete);
       this.dataStore.setCompletion();
       console.log("after", this.dataStore.isComplete);
-    }
+    },
   },
 };
 </script>
 
 <template>
+  <div class="ocean">
+    <div class="bubble bubble--1"></div>
+    <div class="bubble bubble--2"></div>
+    <div class="bubble bubble--3"></div>
+    <div class="bubble bubble--4"></div>
+    <div class="bubble bubble--5"></div>
+    <div class="bubble bubble--6"></div>
+    <div class="bubble bubble--7"></div>
+    <div class="bubble bubble--8"></div>
+    <div class="bubble bubble--9"></div>
+    <div class="bubble bubble--10"></div>
+    <div class="bubble bubble--11"></div>
+    <div class="bubble bubble--12"></div>
   <main :class="'island'">
     <div class="question_card">
       <h2>Domanda:</h2>
@@ -88,8 +99,8 @@ export default {
       </div>
     </div>
     <div id="llm" v-else>
-      <div class="engine">ChatGPT:</div>
-      <ChatGPT />
+      <div class="engine">GeminiAI:</div>
+      <GeminiAI />
     </div>
     <div id="score">
       <h2>Punteggio:</h2>
@@ -116,6 +127,8 @@ export default {
     </RouterLink>
   </main>
   <RouterView />
+</div>
+
 </template>
 
 <style>
@@ -124,6 +137,94 @@ export default {
   --background-cards: #e9c46a;
   --red-coral: #e63946;
   --white-cloud: #f4f4f9;
+}
+@keyframes animateSprite {
+  0% {
+    background-position: -600px; /* Starting position moving left sprite */
+  }
+  20% {
+    background-position: 0px; /* Straight on sprite */
+  }
+  25% {
+    background-position: -200px; /* Moving up sprite */
+  }
+  35% {
+    background-position: -400px; /* Moving right sprite */
+  }
+  40% {
+    background-position: -400px;
+  }
+  50% {
+    background-position: -200px; /* Moving up sprite */
+  }
+  60% {
+    background-position: -0px; /* Straight on sprite */
+  }
+  67% {
+    background-position: -600px; /* Moving up sprite */
+  }
+
+  100% {
+    background-position: -600px;
+  }
+}
+
+@keyframes swim {
+  0% {
+    transform: translate(0, 0); /* Starting position */
+  }
+  20% {
+    transform: translate(
+      calc(-50vw - 100px),
+      0
+    ); /* Animate to center of screen */
+  }
+  25% {
+    transform: translate(
+      calc(-50vw - 100px),
+      0
+    ); /* Stay at the center for 1 second */
+  }
+  35% {
+    transform: translate(
+      calc(-50vw - 100px),
+      -20vh
+    ); /* Animate up for 2 seconds */
+  }
+  50% {
+    transform: translate(-25vw, 15vh); /* Animate bottom right for 3 seconds */
+  }
+  60% {
+    transform: translate(-25vw, -20vh); /* Animate up at right of the screen */
+  }
+  67% {
+    transform: translate(-25vw, -20vh);
+  }
+
+  100% {
+    transform: translate(
+      calc(-100vw - 300px),
+      0
+    ); /* Animate past left past the screen */
+  }
+}
+.ocean {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(0deg, #182848, #2980b9);
+}
+
+.bubble {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  position: absolute;
+  background-color: white;
+  bottom: -30px;
+  opacity: 0.2;
+  animation: bubble 15s ease-in-out infinite,
+  sideWays 4s ease-in-out infinite alternate;
 }
 
 .island {
@@ -145,7 +246,7 @@ export default {
   justify-self: center;
   border-radius: 12px;
   width: 95%;
-  height: 48%;
+  height: 60%;
   font-size: 30px;
   background-color: var(--background-cards);
 }
@@ -207,11 +308,14 @@ export default {
 }
 
 .engine {
-  color: var(--red-coral);
+  color: var(--background-cards);
   align-content: center;
   font-size: 50px;
+  border-radius: 4px;
+  padding: 10px;
   justify-self: center;
   align-self: center;
+  background-color: var(--background-page);
 }
 
 #search_engine {
@@ -242,16 +346,19 @@ export default {
 #llm {
   grid-column: 2;
   grid-row: 2;
-  display: grid;
-  grid-template-rows: 50px 1fr;
   height: 400px;
   width: 95%;
+  display: grid;
+  grid-template-rows: 0.5fr 0.5fr 1fr 1fr;
   margin-bottom: 30px;
   justify-self: center;
   border-radius: 12px;
   background-color: var(--background-cards);
   align-self: flex-start;
   overflow-y: scroll;
+  justify-content: center;
+  align-items: start;
+  justify-items: center;
 }
 
 .results {

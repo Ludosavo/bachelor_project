@@ -43,8 +43,8 @@ export default {
       if (!this.startTime) {
         this.startTime = new Date();
       }
-      const API_KEY = "AIzaSyD6BwDsOxp2WT8vOn9wM832djLqsqzxYnM"; // Replace with your actual API Key
-      const CX = "c5090c2a5c6884f0e"; // Replace with your Search Engine ID
+      const API_KEY = import.meta.env.API_KEY; 
+      const CX = import.meta.env.CX; 
 
       try {
         const response = await axios.get(

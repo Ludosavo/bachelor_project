@@ -5,23 +5,44 @@ export const useQuestionsStore = defineStore("questions", {
   // State holds the data
   state: () => ({
     questions: {
+      //sport
       1: {
-        1: "island 1 question 1",
-        2: "island 1 question 2",
+        1: "Quanti giocatori ci sono in una squadra di pallavolo?",
+        2: "Quale squadra di baseball ha più anni di attività?",
       },
+      //natura
       2: {
-        1: "Qual è il pianeta più caldo del sistema solare?",
-        2: "Come trasformano le piante il sole in energia?",
+        1: "Quanti leopardi delle nevi sono rimasti?",
+        2: "Come viene classificato il leopardo delle nevi?",
       },
+      //geogragia
       3: {
-        1: "island 3 question 1",
-        2: "island 3 question 2",
+        1: "Qual è il vulcano attivo più antico?",
+        2: "In quale paese in Asia si trova il vulcano più piccolo?",
       },
+      //scienza
       4: {
-        1: "island 4 question 1",
-        2: "island 4 question 2",
+        1: "Quanto velocemente può andare un tornado?",
+        2: "Quali sono gli altri nomi del tornado?",
       },
+      5:{
+        1: "Quale animale è più veloce tra lo struzzo e il colibri?"
+      }
     },
+//     Geo: 
+// Geo: 
+
+
+// Sci: 
+// Sci: 
+
+// Nat: 
+// Nat: 
+
+// Sport: 
+// Sport: 
+
+// Final: 
     pageId: null,
     questionId: null,
   }),

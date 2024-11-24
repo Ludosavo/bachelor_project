@@ -1,10 +1,9 @@
 <script>
 import { useDataStore } from "@/stores/store";
 import { useQuestionsStore } from "@/stores/questions";
-import ChatGPT from "@/components/ChatGPT.vue";
 import GoogleCSE from "@/components/GoogleCSE.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-// import HuggingFace from "./components/HuggingFace.vue";
+import GeminiAI from "./components/GeminiAI.vue";
 
 export default {
   setup() {
@@ -29,7 +28,7 @@ export default {
     );
   },
   components: {
-    ChatGPT,
+    GeminiAI,
     GoogleCSE,
     FontAwesomeIcon,
   },
@@ -121,7 +120,7 @@ export default {
   <RouterView />
 </template>
 
-<style>
+<style scoped>
 :root {
   --background-page: #0077b6;
   --background-cards: #e9c46a;
