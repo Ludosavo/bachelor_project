@@ -13,7 +13,9 @@
       <h3>Search Results:</h3>
       <ul>
         <li v-for="result in results" :key="result.cacheId">
-          <a :href="result.link" @click="saveLink" target="_blank">{{ result.title }}</a>
+          <a :href="result.link" @click="saveLink($event)" target="_blank">{{
+            result.title
+          }}</a>
           <p>{{ result.snippet }}</p>
         </li>
       </ul>
@@ -43,8 +45,8 @@ export default {
       if (!this.startTime) {
         this.startTime = new Date();
       }
-      const API_KEY = "AIzaSyD6BwDsOxp2WT8vOn9wM832djLqsqzxYnM"; 
-      const CX = "c5090c2a5c6884f0e"; 
+      const API_KEY = "AIzaSyD6BwDsOxp2WT8vOn9wM832djLqsqzxYnM";
+      const CX = "c5090c2a5c6884f0e";
 
       try {
         const response = await axios.get(
@@ -62,10 +64,9 @@ export default {
           this.results = response.data.items;
           console.log(this.query);
           this.noResults = false;
-          console.log(this.results);
+          console.log("results:", this.results);
           // Computing the time
           this.computeSearchTime();
-          
         } else {
           this.results = null;
           this.noResults = true;
@@ -75,7 +76,7 @@ export default {
       }
     },
     computeSearchTime() {
-      const elapsedTime = new Date() - this.startTime; 
+      const elapsedTime = new Date() - this.startTime;
 
       if (elapsedTime < 120000) {
         // Controlla se sotto i 2 minuti
@@ -85,19 +86,30 @@ export default {
       }
 
       // saving in store
-      const dataStore = useDataStore(); 
-      if (elapsedTime < 120000) { 
-        dataStore.incrementScore(10); 
+      const dataStore = useDataStore();
+      if (elapsedTime < 120000) {
+        dataStore.incrementScore(10);
       } else {
         dataStore.incrementScore(5);
       }
       // Resetta il tempo di inizio per future ricerche
       this.startTime = null;
     },
-    saveLink(e) {
-      searchedLink = e.target.href;
-      this.dataStore.addVisitedLink(searchedLink);
-    }
+    saveLink(event) {
+      event.preventDefault();
+      const searchedLink = event.target.href;
+      const dataStore = useDataStore(); 
+      if (!dataStore.visitedLinks.includes(searchedLink)) {
+        // Save the link if it's not already in the visited links
+        dataStore.addVisitedLink(searchedLink);
+        console.log("Link saved:", searchedLink);
+      } else {
+        console.log("Link already visited:", searchedLink);
+      }
+
+      // Allow the link navigation after saving
+      window.open(searchedLink, "_blank");
+    },
   },
 };
 </script>

@@ -72,7 +72,6 @@ textarea#question {
   margin-bottom: 5rem;
   justify-self: center;
   width: 80%;
-  border: 2px solid black;
   color: black;
   font-size: 25px;
 }

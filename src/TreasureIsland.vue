@@ -4,6 +4,7 @@ import { useQuestionsStore } from "@/stores/questions";
 import GoogleCSE from "@/components/GoogleCSE.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import GeminiAI from "./components/GeminiAI.vue";
+import ChooseEngine from "./ChooseEngine.vue";
 
 export default {
   setup() {
@@ -31,6 +32,7 @@ export default {
     GeminiAI,
     GoogleCSE,
     FontAwesomeIcon,
+    ChooseEngine,
   },
   computed: {
     scoreText() {
@@ -56,12 +58,12 @@ export default {
       }
     },
     updateCurrentQuestionInStore() {
+      console.log("ciccia");
+      
       this.dataStore.setCurrentQuestion(this.questionsStore.currentQuestion);
     },
     completed() {
-      console.log("before", this.dataStore.isComplete);
       this.dataStore.setCompletion();
-      console.log("after", this.dataStore.isComplete);
     },
   },
 };
@@ -84,7 +86,7 @@ export default {
     <main :class="'island'">
       <div class="question_card">
         <h2>Domanda:</h2>
-        <p>{{ this.questionsStore.currentQuestion }}</p>
+        <p>{{ this.questionsStore.currentQuestion}}</p>
       </div>
       <div class="answer_card">
         <h2>Risposta:</h2>
@@ -95,14 +97,7 @@ export default {
         </div>
       </div>
       <div id="search_engine">
-        <div class="engine">Google:</div>
-        <div class="searching">
-          <GoogleCSE />
-        </div>
-      </div>
-      <div id="llm">
-        <div class="engine">GeminiAI:</div>
-        <GeminiAI/>
+        <ChooseEngine />
       </div>
       <div id="score">
         <h2>Punteggio:</h2>
@@ -223,6 +218,10 @@ export default {
   justify-self: center;
   justify-content: space-around;
   align-items: flex-end;
+}
+.chooseEngine{
+  grid-column: 2;
+  grid-row: 2;
 }
 
 #score {

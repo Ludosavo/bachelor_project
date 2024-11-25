@@ -25,24 +25,12 @@ export const useQuestionsStore = defineStore("questions", {
         1: "Quanto velocemente può andare un tornado?",
         2: "Quali sono gli altri nomi del tornado?",
       },
+      //finale
       5:{
-        1: "Quale animale è più veloce tra lo struzzo e il colibri?"
+        1: "Quale animale è più veloce tra lo struzzo e il colibri?",
       }
     },
-//     Geo: 
-// Geo: 
 
-
-// Sci: 
-// Sci: 
-
-// Nat: 
-// Nat: 
-
-// Sport: 
-// Sport: 
-
-// Final: 
     pageId: null,
     questionId: null,
   }),
