@@ -24,10 +24,12 @@
 import { ref } from "vue";
 import { useGetGenerativeModelGP } from "../config/useGetGenerativeModelGP.js";
 import AIAnswer from "../components/AIAnswer.vue";
+import { useDataStore } from "@/stores/store.js";
 
 const question = ref("");
 const answer = ref("");
 const isLoading = ref(false);
+const dataStore = useDataStore();
 
 const fetchAnswer = async () => {
   answer.value = "";
@@ -35,6 +37,8 @@ const fetchAnswer = async () => {
 
   try {
     answer.value = await useGetGenerativeModelGP(question.value);
+    console.log(answer.value);
+    dataStore.addQuestionAnswerGemini(question.value, answer.value);
   } catch (error) {
     console.log({ error });
   } finally {

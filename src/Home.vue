@@ -112,6 +112,7 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   background-image: linear-gradient(0deg, #182848, #2980b9);
 }
 

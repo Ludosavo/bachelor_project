@@ -8,6 +8,7 @@ export default {
   setup() {
     const dataStore = useDataStore();
     const questionsStore = useQuestionsStore();
+
     return {
       dataStore,
       questionsStore,
@@ -49,6 +50,10 @@ export default {
           inputValue
         );
         inputField.value = " ";
+        // l'isola completata
+        // Island completed
+        const islandId = parseInt(this.dataStore.currentQuestion.split("_")[1]);
+        this.dataStore.completeIsland(islandId);
       } else {
         alert("Inserisci una risposta prima di proseguire");
       }
@@ -56,10 +61,15 @@ export default {
     updateCurrentQuestionInStore() {
       this.dataStore.setCurrentQuestion(this.questionsStore.currentQuestion);
     },
-    completed() {
-      this.dataStore.setCompletion();
-      this.islandComplete = true;
+    completeIsland() {
+      const islandId = parseInt(this.$route.params.id);
+      console.log(islandId);
+      this.dataStore.completeIsland(islandId);
     },
+    // completed() {
+    //   this.dataStore.setCompletion();
+    //   this.islandComplete = true;
+    // },
   },
 };
 </script>
@@ -93,7 +103,7 @@ export default {
           <button class="submit" @click="this.submit_answer()">Invia</button>
         </div>
       </div>
-      <div id="search_engine" v-if="$route.params.question % 2 !== 0">
+      <div id="search_engine" v-if="this.$route.params.question % 2 !== 0">
         <div class="engine">Google:</div>
         <div class="searching">
           <GoogleCSE />
@@ -119,7 +129,12 @@ export default {
           style="font-size: xx-large; color: var(--red-coral)"
         />
       </RouterLink>
-      <RouterLink :to="`/islands`" id="next_question" v-else @click="completed">
+      <RouterLink
+        :to="`/islands`"
+        id="next_question"
+        v-else
+        @click="completeIsland"
+      >
         <font-awesome-icon
           icon="house"
           style="font-size: xx-large; color: var(--red-coral)"

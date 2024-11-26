@@ -5,12 +5,18 @@ import download from "downloadjs";
 export const useDataStore = defineStore("data", {
   // State holds the data
   state: () => ({
-    questionAnswers: [], // Array to store question-answer pairs
+    questionAnswers: [],
     visitedLinks: [],
-    currentQuestion: null, // Store the current question
+    geminiQuestionAnswer: [],
+    currentQuestion: null,
     score: 0,
-    isComplete: false,
-    islandComplete: false,
+    islands: {
+      1: { id: 1, isComplete: false },
+      2: { id: 2, isComplete: false },
+      3: { id: 3, isComplete: false },
+      4: { id: 4, isComplete: false },
+      5: { id: 5, isComplete: false },
+    },
   }),
 
   // Actions define methods to manipulate the state
@@ -22,29 +28,46 @@ export const useDataStore = defineStore("data", {
     setCurrentQuestion(question) {
       this.currentQuestion = question;
     },
-    // To retrieve all question-answer pairs
+    // retrieve all question-answer pairs
     getAllQuestionAnswers() {
       return this.questionAnswers;
     },
+    // score data
     setScore(newScore) {
       this.score = newScore;
     },
     incrementScore(points) {
       this.score += points;
     },
-    addVisitedLink(link){
+    addVisitedLink(link) {
       this.visitedLinks.push(link);
     },
-    setCompletion(){
-      this.isComplete = true;
+    // island state:
+    completeIsland(islandId) {
+      // Mark the island as completed
+      const island = this.islands[islandId];
+      if (island) {
+        island.isComplete = true; // This ensures the `isComplete` flag is set to true
+      }
     },
+    resetIslands() {
+      this.islands.forEach((island) => {
+        island.isComplete = false;
+      });
+    },
+    addQuestionAnswerGemini(questionGem, answerGem) {
+      this.geminiQuestionAnswer.push({ questionGem, answerGem });
+      console.log(this.geminiQuestionAnswer); 
+    },
+    // export all data
     export() {
       download(
         JSON.stringify(
           {
             answers: this.questionAnswers,
             score: this.score,
-            visitedLinks : this.visitedLinks,
+            visitedLinks: this.visitedLinks,
+            questionAnswersGemini: this.geminiQuestionAnswer,
           },
           null,
           4

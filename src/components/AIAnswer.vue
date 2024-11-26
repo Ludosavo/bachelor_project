@@ -1,15 +1,21 @@
 <template>
   <div>
-    <p v-if="answer">{{ answer }}</p>
+    <vue-markdown v-if="answer" :source="answer" />
   </div>
 </template>
 
-<script setup>
-defineProps({
-  answer: {
-    type: String,
-    default: "Answer will be displayed here.",
-  },
-});
+<script>
+import VueMarkdown from 'vue-markdown-render'
 
+export default {
+  components: {
+    VueMarkdown,
+  },
+  props: {
+    answer: {
+      type: String,
+      default: "Answer will be displayed here.",
+    },
+  },
+};
 </script>

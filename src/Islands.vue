@@ -33,23 +33,25 @@ export default {
     <div class="bubble bubble--11"></div>
     <div class="bubble bubble--12"></div>
     <main id="islands">
-      <RouterLink to="/island/1/1" id="isla1" style="text-decoration: none">
-        <div class="islandComplete" v-if="this.islandComplete == true">
-          <img
-            src="/island1.png"
-            alt="island1"
-            style="height: 350px; width: 350px; opacity: 50%"
-          />
-        </div>
+      <RouterLink
+        to="/island/1/1"
+        id="isla1"
+        style="text-decoration: none"
+        :class="{ 'island--completed': dataStore.islands[1].isComplete }"
+      >
         <img
           src="/island1.png"
           alt="island1"
           style="height: 350px; width: 350px"
-          v-else
         />
         <div class="subjects">SPORT</div>
       </RouterLink>
-      <RouterLink to="/island/2/1" id="isla2" style="text-decoration: none">
+      <RouterLink
+        to="/island/2/1"
+        id="isla2"
+        style="text-decoration: none"
+        :class="{ 'island--completed': dataStore.islands[2].isComplete }"
+      >
         <img
           src="/island2.png"
           alt="island2"
@@ -57,7 +59,12 @@ export default {
         />
         <div class="subjects">NATURA</div>
       </RouterLink>
-      <RouterLink to="/island/3/1" id="isla3" style="text-decoration: none">
+      <RouterLink
+        to="/island/3/1"
+        id="isla3"
+        style="text-decoration: none"
+        :class="{ 'island--completed': dataStore.islands[3].isComplete }"
+      >
         <img
           src="/island3.png"
           alt="island3"
@@ -65,7 +72,12 @@ export default {
         />
         <div class="subjects">GEOGRAFIA</div>
       </RouterLink>
-      <RouterLink to="/island/4/1" id="isla4" style="text-decoration: none">
+      <RouterLink
+        to="/island/4/1"
+        id="isla4"
+        style="text-decoration: none"
+        :class="{ 'island--completed': dataStore.islands[4  ].isComplete }"
+      >
         <img
           src="/island4.png"
           alt="island4"
@@ -77,6 +89,7 @@ export default {
         to="/islands/treasure"
         id="isla5"
         style="text-decoration: none"
+        :class="{ 'island--completed': dataStore.islands[5].isComplete }"
       >
         <img
           src="/island5.png"
@@ -212,6 +225,7 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   background-image: linear-gradient(0deg, #182848, #2980b9);
 }
 .bubble {
@@ -344,5 +358,11 @@ export default {
   animation-delay: -10.5s;
   animation-duration: 19s;
   opacity: 0.3;
+}
+
+.island--completed {
+  opacity: 0.5;
+  filter: grayscale(100%);
+  pointer-events: none;
 }
 </style>

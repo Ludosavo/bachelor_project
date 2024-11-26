@@ -18,14 +18,14 @@ export default {
   },
   mounted() {
     this.questionsStore.setIds(
-      this.$route.params.id,
-      this.$route.params.question
+      5,
+      1
     );
   },
   beforeUpdate() {
     this.questionsStore.setIds(
-      this.$route.params.id,
-      this.$route.params.question
+      5,
+      1
     );
   },
   components: {
@@ -61,9 +61,6 @@ export default {
       console.log("ciccia");
       
       this.dataStore.setCurrentQuestion(this.questionsStore.currentQuestion);
-    },
-    completed() {
-      this.dataStore.setCompletion();
     },
   },
 };
@@ -118,7 +115,7 @@ export default {
           style="font-size: xx-large; color: var(--red-coral)"
         />
       </RouterLink>
-      <RouterLink :to="`/islands`" id="next_question" v-else @click="completed">
+      <RouterLink :to="`/islands`" id="next_question" v-else>
         <font-awesome-icon
           icon="house"
           style="font-size: xx-large; color: var(--red-coral)"
