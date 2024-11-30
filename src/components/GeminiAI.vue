@@ -1,8 +1,8 @@
 <template>
-  <h1 class="mb-5">Ciao sono Gemini AI, come posso aiutarti?</h1>
+  <h1 class="mb-5">Ciao sono GeminiAI, come posso aiutarti?</h1>
 
   <form class="mb-5" @submit.prevent="fetchAnswer">
-    <div>
+    <div id="wrapper_textarea">
       <textarea
         name="question"
         id="question"
@@ -12,7 +12,7 @@
       ></textarea>
     </div>
     <button type="submit" :disabled="!question" id="ask">
-      {{ `${isLoading ? "asking gemini..." : "Ask"}` }}
+      {{ `${isLoading ? "asking gemini..." : "Cerca"}` }}
     </button>
   </form>
   <div class="mb-10">
@@ -37,7 +37,6 @@ const fetchAnswer = async () => {
 
   try {
     answer.value = await useGetGenerativeModelGP(question.value);
-    console.log(answer.value);
     dataStore.addQuestionAnswerGemini(question.value, answer.value);
   } catch (error) {
     console.log({ error });
@@ -50,25 +49,22 @@ const fetchAnswer = async () => {
 
 <style lang="scss" scoped>
 .mb-5 {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  width: 100%;
-  justify-content: center;
-  justify-self: center;
+  justify-items: center;
+  align-self: baseline;
 }
 h1.mb-5 {
   grid-row: 2;
   margin-bottom: 2rem;
   justify-self: center;
-  color: #e63946;
+  color: #000000;
 }
+#wrapper_text{
+  align-items: center;
+}
+
 textarea#question {
-  grid-row: 3;
-  grid-column: 1;
-  justify-self: center;
   height: 40px;
-  width: 90%;
+  width: 100%;
   border-radius: 4px;
 }
 .mb-10 {
@@ -81,7 +77,7 @@ textarea#question {
 }
 
 button#ask {
-  grid-column: 1;
   justify-self: center;
+  background-color: #0077b6;
 }
 </style>

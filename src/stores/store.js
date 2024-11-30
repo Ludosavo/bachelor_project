@@ -57,7 +57,6 @@ export const useDataStore = defineStore("data", {
     },
     addQuestionAnswerGemini(questionGem, answerGem) {
       this.geminiQuestionAnswer.push({ questionGem, answerGem });
-      console.log(this.geminiQuestionAnswer); 
     },
     // export all data
     export() {

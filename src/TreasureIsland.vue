@@ -112,13 +112,13 @@ export default {
       >
         <font-awesome-icon
           icon="arrow-right"
-          style="font-size: xx-large; color: var(--red-coral)"
+          style="font-size: xx-large; color: var(--font-color)"
         />
       </RouterLink>
       <RouterLink :to="`/islands`" id="next_question" v-else>
         <font-awesome-icon
           icon="house"
-          style="font-size: xx-large; color: var(--red-coral)"
+          style="font-size: xx-large; color: var(--font-color)"
         />
       </RouterLink>
     </main>
@@ -130,7 +130,7 @@ export default {
 :root {
   --background-page: #0077b6;
   --background-cards: #e9c46a;
-  --red-coral: #e63946;
+  --font-color: #000000;
   --white-cloud: #f4f4f9;
 }
 
@@ -160,13 +160,13 @@ export default {
 
 .question_card h2 {
   text-align: center;
-  color: var(--red-coral);
+  color: var(--font-color);
 }
 
 .question_card p {
   text-align: center;
   font-size: 40px;
-  color: var(--red-coral);
+  color: var(--font-color);
 }
 
 .answer_card {
@@ -177,13 +177,13 @@ export default {
   justify-self: center;
   border-radius: 12px;
   background-color: var(--background-cards);
-  color: var(--red-coral);
+  color: var(--font-color);
   font-size: 30px;
 }
 
 .answer_card h2 {
   grid-row: 1;
-  color: var(--red-coral);
+  color: var(--font-color);
   text-align: center;
 }
 
@@ -206,7 +206,7 @@ export default {
   grid-column: 3;
   grid-row: 1;
   display: flex;
-  color: var(--red-coral);
+  color: var(--font-color);
   background-color: var(--background-cards);
   padding: 5px;
   width: 30%;
@@ -225,7 +225,7 @@ export default {
   grid-column: 3;
   grid-row: 1;
   display: flex;
-  color: var(--red-coral);
+  color: var(--font-color);
   background-color: var(--background-cards);
   padding: 5px;
   width: 100%;
@@ -303,7 +303,7 @@ export default {
 }
 
 #homeButton {
-  color: var(--red-coral);
+  color: var(--font-color);
   background-color: var(--background-cards);
   height: 40px;
 }

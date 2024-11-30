@@ -5,12 +5,12 @@
       style="width: 90%"
       v-model="query"
       @keyup.enter="performSearch"
-      placeholder="Search..."
+      placeholder="Cerca..."
     />
     <button @click="performSearch">Cerca</button>
 
     <div v-if="results">
-      <h3>Search Results:</h3>
+      <h3>Risultati Ricerca:</h3>
       <ul>
         <li v-for="result in results" :key="result.cacheId">
           <a :href="result.link" @click="saveLink($event)" target="_blank">{{
@@ -21,7 +21,7 @@
       </ul>
     </div>
     <div v-else-if="noResults">
-      <p>No results found.</p>
+      <p>Nessun risultato trovato.</p>
     </div>
   </div>
 </template>
@@ -145,6 +145,7 @@ input {
 }
 
 button {
+  margin-top: 10px;
   padding: 6px 20px;
   background-color: var(--red-coral);
   color: var(--white-cloud);
@@ -152,10 +153,7 @@ button {
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
-}
-
-button:hover {
-  background-color: #b32734;
+  background-color: #0077b6;
 }
 
 /* Lista dei risultati */
@@ -175,20 +173,20 @@ ul {
 li {
   margin-bottom: 15px;
   padding: 15px;
-  background-color: var(--background-cards);
+  background-color: rgba(255, 254, 254, 0.503);
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 li a {
   font-size: 25px;
-  color: rgb(4, 27, 63);
+  color: rgb(7 62 149);
   text-decoration: none;
   font-weight: bold;
 }
 
 li a:visited {
-  color: rgb(106, 8, 8);
+  color: rgb(209, 33, 33);
 }
 
 li p {
@@ -198,7 +196,7 @@ li p {
 }
 
 h3 {
-  color: var(--red-coral);
+  color: black;
   margin-bottom: 20px;
 }
 

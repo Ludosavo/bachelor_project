@@ -4,6 +4,7 @@ import { useQuestionsStore } from "@/stores/questions";
 import GoogleCSE from "@/components/GoogleCSE.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import GeminiAI from "./components/GeminiAI.vue";
+import GeminiTutorial from "./components/GeminiTutorial.vue";
 export default {
   setup() {
     const dataStore = useDataStore();
@@ -28,6 +29,7 @@ export default {
   },
   components: {
     GeminiAI,
+    GeminiTutorial,
     GoogleCSE,
     FontAwesomeIcon,
   },
@@ -50,7 +52,6 @@ export default {
           inputValue
         );
         inputField.value = " ";
-        // l'isola completata
         // Island completed
         const islandId = parseInt(this.dataStore.currentQuestion.split("_")[1]);
         this.dataStore.completeIsland(islandId);
@@ -66,10 +67,7 @@ export default {
       console.log(islandId);
       this.dataStore.completeIsland(islandId);
     },
-    // completed() {
-    //   this.dataStore.setCompletion();
-    //   this.islandComplete = true;
-    // },
+
   },
 };
 </script>
@@ -112,6 +110,8 @@ export default {
       <div id="llm" v-else>
         <div class="engine">GeminiAI:</div>
         <GeminiAI />
+        <RouterLink :to="`/island/${this.$route.params.id}/${
+          parseInt(this.$route.params.question)}/geminiTutorial`" id="tutGem" style="text-decoration: none; color: #0077b6;">Cos'è GeminiAI</RouterLink>
       </div>
       <div id="score">
         <h2>Punteggio:</h2>
@@ -126,7 +126,7 @@ export default {
       >
         <font-awesome-icon
           icon="arrow-right"
-          style="font-size: xx-large; color: var(--red-coral)"
+          style="font-size: xx-large; color: var(--background-page)"
         />
       </RouterLink>
       <RouterLink
@@ -137,7 +137,7 @@ export default {
       >
         <font-awesome-icon
           icon="house"
-          style="font-size: xx-large; color: var(--red-coral)"
+          style="font-size: xx-large; color: var(--background-page)"
         />
       </RouterLink>
     </main>
@@ -149,7 +149,7 @@ export default {
 :root {
   --background-page: #0077b6;
   --background-cards: #e9c46a;
-  --red-coral: #e63946;
+  --font-color: #000000;
   --white-cloud: #f4f4f9;
 }
 @keyframes animateSprite {
@@ -386,13 +386,13 @@ export default {
 
 .question_card h2 {
   text-align: center;
-  color: var(--red-coral);
+  color: var(--font-color);
 }
 
 .question_card p {
   text-align: center;
   font-size: 40px;
-  color: var(--red-coral);
+  color: var(--font-color);
 }
 
 .answer_card {
@@ -403,12 +403,19 @@ export default {
   justify-self: center;
   border-radius: 12px;
   background-color: var(--background-cards);
-  color: var(--red-coral);
+  color: var(--font-color);
   font-size: 30px;
 }
 
+#tutGem{
+  width: 20%;
+  text-align: center;
+  justify-self: end;
+  margin-right: -30%;
+}
+
 .answer_card h2 {
-  color: var(--red-coral);
+  color: var(--font-color);
   text-align: center;
 }
 
@@ -429,13 +436,12 @@ export default {
   grid-column: 3;
   grid-row: 1;
   display: flex;
-  color: var(--red-coral);
+  color: var(--font-color);
   background-color: var(--background-cards);
   padding: 5px;
   width: 100%;
   border-radius: 4px;
   align-self: flex-start;
-
   justify-content: space-around;
   align-items: flex-end;
 }
@@ -444,8 +450,9 @@ export default {
   color: var(--background-cards);
   align-content: center;
   font-size: 50px;
-  border-radius: 4px;
-  padding: 10px;
+  border-radius: 10px;
+  margin-top:26px;
+  padding: 3px;
   justify-self: center;
   align-self: center;
   background-color: var(--background-page);
@@ -457,22 +464,26 @@ export default {
   display: grid;
   grid-template-rows: 50px 1fr;
   height: 400px;
-  overflow-y: auto;
   width: 95%;
   margin-bottom: 30px;
+  padding-top:20px;
   justify-self: center;
-  border-radius: 12px;
+  border: 1px solid #e9c46a;
+  border-radius: 15px;
   background-color: var(--background-cards);
   align-self: flex-start;
   overflow-y: scroll;
 }
 
 #search_engine .engine {
+  padding-top: 0;
+  margin-top: 10px;
   justify-self: center;
   grid-row: 1;
 }
 
 #search_engine .searching {
+  padding: 20px;
   justify-self: center;
   grid-row: 2;
 }
@@ -486,12 +497,9 @@ export default {
   margin-bottom: 30px;
   justify-self: center;
   border-radius: 12px;
-  background-color: var(--background-cards);
-  align-self: flex-start;
-  overflow-y: scroll;
   justify-content: center;
-  align-items: start;
-  justify-items: center;
+  background-color: var(--background-cards);
+  overflow-y: scroll;
 }
 
 .results {
@@ -505,16 +513,16 @@ export default {
   grid-row: 3;
   border: none;
   background-color: var(--background-cards);
+  color: var(--background-page);
   justify-self: center;
   border-radius: 4px;
-
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
 #homeButton {
-  color: var(--red-coral);
+  color: var(--font-color);
   background-color: var(--background-cards);
   height: 40px;
 }

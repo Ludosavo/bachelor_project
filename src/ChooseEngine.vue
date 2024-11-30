@@ -73,7 +73,7 @@ export default {
   text-align: center;
   justify-self: center;
   background-color: #e9c46a;
-  color: #e63946;
+  color: black;
   border-radius: 8px;
   height: 400px;
 }
@@ -87,7 +87,7 @@ export default {
 #gemini {
   position: relative; /* Enable positioning for pseudo-element */
   align-content: center;
-  border: 2px solid #e63946;
+  border: 2px solid black;
   justify-self: center;
   width: 60%;
   border-radius: 8px;
