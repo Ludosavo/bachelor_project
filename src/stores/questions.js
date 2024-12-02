@@ -27,7 +27,7 @@ export const useQuestionsStore = defineStore("questions", {
       },
       //finale
       5:{
-        1: "Quale animale è più veloce tra lo struzzo e il colibri?",
+        1: "Quale animale è più veloce tra lo struzzo e il colibrì?",
       }
     },
 

@@ -16,6 +16,11 @@ export default {
     };
   },
   mounted() {
+    const currentIsland = this.$route.params.id;
+    if (!this.dataStore.startTimes[currentIsland]) {
+      this.dataStore.setStartTime(currentIsland, new Date());
+    }
+
     this.questionsStore.setIds(
       this.$route.params.id,
       this.$route.params.question
@@ -42,19 +47,42 @@ export default {
   methods: {
     submit_answer() {
       const inputArray = [];
-      let inputValue = document.getElementById("inputField").value;
+      const inputField = document.getElementById("inputField");
+      const output = document.getElementById("output");
+
+      if (!inputField) {
+        console.error("Input field element not found.");
+        return;
+      }
+
+      let inputValue = inputField.value;
 
       // Check if input is not empty before saving
       if (inputValue.trim() !== "") {
         inputArray.push(inputValue);
+
+        // Add the question and answer to the data store
         this.dataStore.addQuestionAnswer(
           this.questionsStore.currentQuestion,
           inputValue
         );
-        inputField.value = " ";
-        // Island completed
-        const islandId = parseInt(this.dataStore.currentQuestion.split("_")[1]);
-        this.dataStore.completeIsland(islandId);
+
+        // Reset the input field
+        inputField.value = "";
+
+        // Update the output message
+        if (output) {
+          output.textContent = "Risposta salvata!";
+        } else {
+          console.error("Output element not found.");
+        }
+
+        // Clear the output after a short delay to prepare for the next question
+        setTimeout(() => {
+          if (output) {
+            output.textContent = "";
+          }
+        }, 1000); 
       } else {
         alert("Inserisci una risposta prima di proseguire");
       }
@@ -64,10 +92,9 @@ export default {
     },
     completeIsland() {
       const islandId = parseInt(this.$route.params.id);
-      console.log(islandId);
+      const completionTime = this.dataStore.computeCompletionTime(islandId);
       this.dataStore.completeIsland(islandId);
     },
-
   },
 };
 </script>
@@ -98,6 +125,7 @@ export default {
           id="inputField"
         ></textarea>
         <div id="input_button">
+          <p id="output"></p>
           <button class="submit" @click="this.submit_answer()">Invia</button>
         </div>
       </div>
@@ -110,8 +138,14 @@ export default {
       <div id="llm" v-else>
         <div class="engine">GeminiAI:</div>
         <GeminiAI />
-        <RouterLink :to="`/island/${this.$route.params.id}/${
-          parseInt(this.$route.params.question)}/geminiTutorial`" id="tutGem" style="text-decoration: none; color: #0077b6;">Cos'è GeminiAI</RouterLink>
+        <RouterLink
+          :to="`/island/${this.$route.params.id}/${parseInt(
+            this.$route.params.question
+          )}/geminiTutorial`"
+          id="tutGem"
+          style="text-decoration: none; color: #0077b6"
+          >Cos'è GeminiAI</RouterLink
+        >
       </div>
       <div id="score">
         <h2>Punteggio:</h2>
@@ -397,7 +431,7 @@ export default {
 
 .answer_card {
   width: 95%;
-  height: 60%;
+  height: 90%;
   grid-column: 2;
   grid-row: 3;
   justify-self: center;
@@ -407,7 +441,7 @@ export default {
   font-size: 30px;
 }
 
-#tutGem{
+#tutGem {
   width: 20%;
   text-align: center;
   justify-self: end;
@@ -451,7 +485,7 @@ export default {
   align-content: center;
   font-size: 50px;
   border-radius: 10px;
-  margin-top:26px;
+  margin-top: 26px;
   padding: 3px;
   justify-self: center;
   align-self: center;
@@ -466,7 +500,7 @@ export default {
   height: 400px;
   width: 95%;
   margin-bottom: 30px;
-  padding-top:20px;
+  padding-top: 20px;
   justify-self: center;
   border: 1px solid #e9c46a;
   border-radius: 15px;
@@ -487,6 +521,7 @@ export default {
   justify-self: center;
   grid-row: 2;
 }
+
 #llm {
   grid-column: 2;
   grid-row: 2;

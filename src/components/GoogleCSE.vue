@@ -1,29 +1,29 @@
 <template>
-  <div class="results">
-    <input
-      type="text"
-      style="width: 90%"
-      v-model="query"
-      @keyup.enter="performSearch"
-      placeholder="Cerca..."
-    />
-    <button @click="performSearch">Cerca</button>
+    <div class="results">
+      <input
+        type="text"
+        style="width: 90%"
+        v-model="query"
+        @keyup.enter="performSearch"
+        placeholder="Cerca..."
+      />
+      <button @click="performSearch">Cerca</button>
 
-    <div v-if="results">
-      <h3>Risultati Ricerca:</h3>
-      <ul>
-        <li v-for="result in results" :key="result.cacheId">
-          <a :href="result.link" @click="saveLink($event)" target="_blank">{{
-            result.title
-          }}</a>
-          <p>{{ result.snippet }}</p>
-        </li>
-      </ul>
+      <div v-if="results">
+        <h3>Risultati Ricerca:</h3>
+        <ul>
+          <li v-for="result in results" :key="result.cacheId">
+            <a :href="result.link" @click="saveLink($event)" target="_blank">{{
+              result.title
+            }}</a>
+            <p>{{ result.snippet }}</p>
+          </li>
+        </ul>
+      </div>
+      <div v-else-if="noResults">
+        <p>Nessun risultato trovato.</p>
+      </div>
     </div>
-    <div v-else-if="noResults">
-      <p>Nessun risultato trovato.</p>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -62,9 +62,7 @@ export default {
 
         if (response.data.items && response.data.items.length > 0) {
           this.results = response.data.items;
-          console.log(this.query);
           this.noResults = false;
-          console.log("results:", this.results);
           // Computing the time
           this.computeSearchTime();
         } else {
@@ -98,7 +96,7 @@ export default {
     saveLink(event) {
       event.preventDefault();
       const searchedLink = event.target.href;
-      const dataStore = useDataStore(); 
+      const dataStore = useDataStore();
       if (!dataStore.visitedLinks.includes(searchedLink)) {
         // Save the link if it's not already in the visited links
         dataStore.addVisitedLink(searchedLink);
@@ -163,6 +161,9 @@ button {
   width: 90%;
   max-width: 800px;
 }
+li a:visited {
+  color: rgb(209, 33, 33) !important;
+}
 
 ul {
   list-style-type: none;
@@ -180,13 +181,9 @@ li {
 
 li a {
   font-size: 25px;
-  color: rgb(7 62 149);
+  color: rgb(8 78 184);
   text-decoration: none;
   font-weight: bold;
-}
-
-li a:visited {
-  color: rgb(209, 33, 33);
 }
 
 li p {

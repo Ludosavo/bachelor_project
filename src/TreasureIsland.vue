@@ -17,16 +17,10 @@ export default {
     };
   },
   mounted() {
-    this.questionsStore.setIds(
-      5,
-      1
-    );
+    this.questionsStore.setIds(5, 1);
   },
   beforeUpdate() {
-    this.questionsStore.setIds(
-      5,
-      1
-    );
+    this.questionsStore.setIds(5, 1);
   },
   components: {
     GeminiAI,
@@ -44,6 +38,7 @@ export default {
     submit_answer() {
       const inputArray = [];
       let inputValue = document.getElementById("inputField").value;
+      const output = document.getElementById("output");
 
       // Check if input is not empty before saving
       if (inputValue.trim() !== "") {
@@ -56,10 +51,21 @@ export default {
       } else {
         alert("Inserisci una risposta prima di proseguire");
       }
+
+      // Update the output message
+      if (output) {
+        output.textContent = "Hai finito! Ottimo lavoro!";
+      } else {
+        console.error("Output element not found.");
+      }
+      // Clear the output after a short delay to prepare for the next question
+      setTimeout(() => {
+        if (output) {
+          output.textContent = "";
+        }
+      }, 10000);
     },
     updateCurrentQuestionInStore() {
-      console.log("ciccia");
-      
       this.dataStore.setCurrentQuestion(this.questionsStore.currentQuestion);
     },
   },
@@ -83,13 +89,14 @@ export default {
     <main :class="'island'">
       <div class="question_card">
         <h2>Domanda:</h2>
-        <p>{{ this.questionsStore.currentQuestion}}</p>
+        <p>{{ this.questionsStore.currentQuestion }}</p>
       </div>
       <div class="answer_card">
         <h2>Risposta:</h2>
         <textarea placeholder="Scrivi qui la risposta" id="inputField">
         </textarea>
         <div id="input_button">
+          <p id="output"></p>
           <button class="submit" @click="this.submit_answer()">Invia</button>
         </div>
       </div>
@@ -171,7 +178,7 @@ export default {
 
 .answer_card {
   width: 95%;
-  height: 60%;
+  height: 90%;
   grid-column: 2;
   grid-row: 3;
   justify-self: center;
@@ -216,7 +223,7 @@ export default {
   justify-content: space-around;
   align-items: flex-end;
 }
-.chooseEngine{
+.chooseEngine {
   grid-column: 2;
   grid-row: 2;
 }

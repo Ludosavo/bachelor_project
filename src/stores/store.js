@@ -10,6 +10,8 @@ export const useDataStore = defineStore("data", {
     geminiQuestionAnswer: [],
     currentQuestion: null,
     score: 0,
+    startTimes: {},
+    completedTimes: {},
     islands: {
       1: { id: 1, isComplete: false },
       2: { id: 2, isComplete: false },
@@ -36,6 +38,37 @@ export const useDataStore = defineStore("data", {
     setScore(newScore) {
       this.score = newScore;
     },
+    setStartTime(islandId, time) {
+      this.startTimes[islandId] = time;
+    },
+    computeCompletionTime(islandId) {
+      const startTime = this.startTimes[islandId];
+      const endTime = new Date(); 
+      if (!startTime) return "Tempo di inizio non registrato.";
+
+      const totalMs = endTime - new Date(startTime);
+      const minutes = Math.floor((totalMs % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((totalMs % (1000 * 60)) / 1000);
+
+      const options = {
+        timeZone: "Europe/Zurich",
+        weekday: "long", 
+        year: "numeric",
+        month: "long", 
+        day: "numeric", 
+        hour: "2-digit", 
+        minute: "2-digit", 
+        second: "2-digit", 
+        hour12: false, 
+      };
+
+      // Convert string to make it "readable"
+      const formattedEndTime = endTime.toLocaleString('it-IT', options);
+
+      this.completedTimes[islandId] = { minutes, seconds };
+
+      return `Tempo completato: ${minutes} minuti e ${seconds} secondi. Ora di completamento: ${formattedEndTime}`;
+    },
     incrementScore(points) {
       this.score += points;
     },
@@ -47,7 +80,7 @@ export const useDataStore = defineStore("data", {
       // Mark the island as completed
       const island = this.islands[islandId];
       if (island) {
-        island.isComplete = true; // This ensures the `isComplete` flag is set to true
+        island.isComplete = true;
       }
     },
     resetIslands() {
@@ -60,20 +93,28 @@ export const useDataStore = defineStore("data", {
     },
     // export all data
     export() {
-      download(
-        JSON.stringify(
-          {
-            answers: this.questionAnswers,
-            score: this.score,
-            visitedLinks: this.visitedLinks,
-            questionAnswersGemini: this.geminiQuestionAnswer,
-          },
-          null,
-          4
-        ),
-        "data.json",
-        "text/json"
-      );
+      const data = {
+        question_answers: this.questionAnswers,
+        score: this.score,
+        visitedLinks: this.visitedLinks,
+        questionAnswersGemini: this.geminiQuestionAnswer,
+        startTimes: this.startTimes,
+        completedTimes: this.completedTimes,
+      };
+
+      // Converti dati => JSON
+      const jsonString = JSON.stringify(data, null, 4);
+
+      // Blob per gestire download file JSON
+      const blob = new Blob([jsonString], { type: "application/json" });
+
+      // link scaricare il file
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "gameData.json";
+
+      // Simula il clic sul link per avviare il download
+      link.click();
     },
   },
 });
