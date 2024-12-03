@@ -17,7 +17,13 @@ export default {
     };
   },
   mounted() {
-    this.questionsStore.setIds(5, 1);
+    let id = 5;
+    let question_number = 1;
+    this.questionsStore.setIds(id, question_number);
+    if (!this.dataStore.startTimes[id]) {
+      this.dataStore.setStartTime(id, new Date());
+    }
+
   },
   beforeUpdate() {
     this.questionsStore.setIds(5, 1);
@@ -68,6 +74,10 @@ export default {
     updateCurrentQuestionInStore() {
       this.dataStore.setCurrentQuestion(this.questionsStore.currentQuestion);
     },
+    completeIsland() {
+      const completionTime = this.dataStore.computeCompletionTime(5);
+      this.dataStore.completeIsland(5);
+    },
   },
 };
 </script>
@@ -107,9 +117,6 @@ export default {
         <h2>Punteggio:</h2>
         <h2>{{ this.dataStore.score }}</h2>
       </div>
-      <div id="download" @click="this.dataStore.export">
-        <font-awesome-icon icon="download" style="font-size: xx-large" />
-      </div>
       <RouterLink
         :to="`/island/${this.$route.params.id}/${
           parseInt(this.$route.params.question) + 1
@@ -126,6 +133,7 @@ export default {
         <font-awesome-icon
           icon="house"
           style="font-size: xx-large; color: var(--font-color)"
+          @click="completeIsland"
         />
       </RouterLink>
     </main>
@@ -209,20 +217,7 @@ export default {
   width: 90%;
   overflow: scroll;
 }
-#download {
-  grid-column: 3;
-  grid-row: 1;
-  display: flex;
-  color: var(--font-color);
-  background-color: var(--background-cards);
-  padding: 5px;
-  width: 30%;
-  border-radius: 4px;
-  align-self: center;
-  justify-self: center;
-  justify-content: space-around;
-  align-items: flex-end;
-}
+
 .chooseEngine {
   grid-column: 2;
   grid-row: 2;

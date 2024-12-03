@@ -1,13 +1,14 @@
 import { defineStore } from "pinia";
-import download from "downloadjs";
 
 // Reminder: 'data' parameter is the unique id of the store
 export const useDataStore = defineStore("data", {
   // State holds the data
   state: () => ({
     questionAnswers: [],
+    listSearchResults:[],
     visitedLinks: [],
     geminiQuestionAnswer: [],
+    correct_answers:[],
     currentQuestion: null,
     score: 0,
     startTimes: {},
@@ -23,6 +24,9 @@ export const useDataStore = defineStore("data", {
 
   // Actions define methods to manipulate the state
   actions: {
+    getCorrectAnswers(id, answers){
+      this.correctAnswers.push({})
+    },
     // Action to add a question-answer pair
     addQuestionAnswer(question, answer) {
       this.questionAnswers.push({ question, answer });
@@ -64,7 +68,7 @@ export const useDataStore = defineStore("data", {
 
       // Convert string to make it "readable"
       const formattedEndTime = endTime.toLocaleString('it-IT', options);
-
+      
       this.completedTimes[islandId] = { minutes, seconds };
 
       return `Tempo completato: ${minutes} minuti e ${seconds} secondi. Ora di completamento: ${formattedEndTime}`;
@@ -97,6 +101,7 @@ export const useDataStore = defineStore("data", {
         question_answers: this.questionAnswers,
         score: this.score,
         visitedLinks: this.visitedLinks,
+        listSearchResults: this.listSearchResults,
         questionAnswersGemini: this.geminiQuestionAnswer,
         startTimes: this.startTimes,
         completedTimes: this.completedTimes,

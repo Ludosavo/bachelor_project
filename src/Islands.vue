@@ -15,6 +15,9 @@ export default {
       islandComplete,
     };
   },
+  components:{
+    FontAwesomeIcon,
+  }
 };
 </script>
 
@@ -59,6 +62,9 @@ export default {
         />
         <div class="subjects">NATURA</div>
       </RouterLink>
+      <div id="download" @click="this.dataStore.export">
+        <font-awesome-icon icon="download" style="font-size: xx-large" />
+      </div>
       <RouterLink
         to="/island/3/1"
         id="isla3"
@@ -76,7 +82,7 @@ export default {
         to="/island/4/1"
         id="isla4"
         style="text-decoration: none"
-        :class="{ 'island--completed': dataStore.islands[4  ].isComplete }"
+        :class="{ 'island--completed': dataStore.islands[4].isComplete }"
       >
         <img
           src="/island4.png"
@@ -143,6 +149,19 @@ export default {
   text-align: center;
   text-decoration: none;
   color: bisque;
+}
+#download {
+  grid-column: 3;
+  grid-row: 1;
+  display: flex;
+  color: var(--white-cloud);
+  padding: 5px;
+  width: 20%;
+  border-radius: 4px;
+  align-self: flex-start;
+  justify-self: right;
+  justify-content: space-around;
+  align-items: flex-end;
 }
 
 #islands img {

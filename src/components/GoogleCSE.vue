@@ -1,35 +1,42 @@
 <template>
-    <div class="results">
-      <input
-        type="text"
-        style="width: 90%"
-        v-model="query"
-        @keyup.enter="performSearch"
-        placeholder="Cerca..."
-      />
-      <button @click="performSearch">Cerca</button>
+  <div class="results">
+    <input
+      type="text"
+      style="width: 90%"
+      v-model="query"
+      @keyup.enter="performSearch"
+      placeholder="Cerca..."
+    />
+    <button @click="performSearch">Cerca</button>
 
-      <div v-if="results">
-        <h3>Risultati Ricerca:</h3>
-        <ul>
-          <li v-for="result in results" :key="result.cacheId">
-            <a :href="result.link" @click="saveLink($event)" target="_blank">{{
-              result.title
-            }}</a>
-            <p>{{ result.snippet }}</p>
-          </li>
-        </ul>
-      </div>
-      <div v-else-if="noResults">
-        <p>Nessun risultato trovato.</p>
-      </div>
+    <div v-if="results">
+      <h3>Risultati Ricerca:</h3>
+      <ul>
+        <li v-for="result in results" :key="result.cacheId">
+          <a :href="result.link" @click="saveLink($event)" target="_blank">{{
+            result.title
+          }}</a>
+          <p>{{ result.snippet }}</p>
+        </li>
+      </ul>
     </div>
+    <div v-else-if="noResults">
+      <p>Nessun risultato trovato.</p>
+    </div>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 import { useDataStore } from "@/stores/store";
 export default {
+  setup() {
+    const dataStore = useDataStore();
+
+    return {
+      dataStore,
+    };
+  },
   data() {
     return {
       query: "",
@@ -62,6 +69,14 @@ export default {
 
         if (response.data.items && response.data.items.length > 0) {
           this.results = response.data.items;
+          const links = response.data.items.map((item, index) => ({
+            link_number: index + 1,
+            link: item.link,
+          }));
+
+          // Push the numbered titles to your store
+          this.dataStore.listSearchResults.push(...links);
+        
           this.noResults = false;
           // Computing the time
           this.computeSearchTime();
