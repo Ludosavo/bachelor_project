@@ -4,14 +4,17 @@ import { useQuestionsStore } from "@/stores/questions";
 import GoogleCSE from "@/components/GoogleCSE.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import GeminiAI from "./components/GeminiAI.vue";
+import { useAnswersStore } from "./stores/answers";
 export default {
   setup() {
     const dataStore = useDataStore();
     const questionsStore = useQuestionsStore();
+    const answersStore = useAnswersStore();
     let islandComplete = false;
     return {
       dataStore,
       questionsStore,
+      answersStore,
       islandComplete,
     };
   },
@@ -64,6 +67,9 @@ export default {
       </RouterLink>
       <div id="download" @click="this.dataStore.export">
         <font-awesome-icon icon="download" style="font-size: xx-large" />
+      </div>
+      <div id="answers_download" @click="this.answersStore.export">
+        <font-awesome-icon icon="file-lines" style="font-size: xx-large;"/>
       </div>
       <RouterLink
         to="/island/3/1"
@@ -156,6 +162,20 @@ export default {
   display: flex;
   color: var(--white-cloud);
   padding: 5px;
+  width: 20%;
+  border-radius: 4px;
+  align-self: flex-start;
+  justify-self: right;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+#answers_download {
+  grid-column: 3;
+  grid-row: 1;
+  display: flex;
+  color: var(--white-cloud);
+  padding-top: 50px;
+  padding-right: 5px;
   width: 20%;
   border-radius: 4px;
   align-self: flex-start;

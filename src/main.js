@@ -13,12 +13,13 @@ import {
   faArrowLeft,
   faHouse,
   faDownload,
+  faFileLines,
 } from "@fortawesome/free-solid-svg-icons";
 
 const pinia = createPinia();
 const app = createApp(App);
 
-library.add(faArrowRight, faArrowLeft, faHouse, faDownload);
+library.add(faArrowRight, faArrowLeft, faHouse, faDownload, faFileLines);
 app.use(router);
 app.use(pinia);
 app.mount("#app");
